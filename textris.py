@@ -8,6 +8,7 @@ from string import ascii_lowercase
 
 # Option: save/load scores
 SAVESCORES = True
+SCOREFILE = "scores"
 
 # General window prefs
 FONTSIZE = 3
@@ -94,6 +95,7 @@ minoR = 0
 
 keycooldown = 0
 
+
 scores = []
 
 # !The program starts at the very bottom!
@@ -102,11 +104,11 @@ scores = []
 def fetchScores():
 	# Read the scores.tetris score file
 	global scores, top
-	if not os.path.exists("scores.tetris"):
-		with open("scores.tetris","wb") as fc:
+	if not os.path.exists(SCOREFILE):
+		with open(SCOREFILE,"wb") as fc:
 			fc.write(struct.pack("<I", 0))
 	
-	f = open("scores.tetris","rb")
+	f = open(SCOREFILE,"rb")
 	l = struct.unpack("<I", f.read(4))[0]
 	scores = sorted([(f.read(3).decode("ascii"), struct.unpack("<I", f.read(4))[0]) for i in range(l)], key=lambda x: -x[1])
 	top = 0 if len(scores) == 0 else scores[0][1]
@@ -344,7 +346,7 @@ def scoreboard():
 	stdout.flush()
 	
 	# Save the new scoreboard
-	f = open("scores.tetris","wb")
+	f = open(SCOREFILE,"wb")
 	f.write(struct.pack("<I", len(scores)))
 	for s in scores:
 		if s[0] == " - ":
