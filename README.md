@@ -24,7 +24,7 @@ No additional modules/libraries needed!
 
 ## Score saving
 
-Scores are saved in a custom file named scores located in the shell's work current work directory.
+Scores are saved in a custom file named scores located in the shell's current work directory.
 To disable score saving and loading, change the SAVESCORE variable in textris.py.
 
 ```python
