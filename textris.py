@@ -266,7 +266,8 @@ def drawTitle():
 	for i in range(20):
 		stdout.write("\033[" + str(4+i) + ";10H" + " "*10)
 	
-	stdout.write("\033[0;97;40m\033[5;10H╔════════╗\033[6;10H║ TETRIS ║\033[7;10H╚════════╝\033[9;10Hby LeoLuxo")
+	# stdout.write("\033[0;97;40m\033[5;10H╔════════╗\033[6;10H║ TETRIS ║\033[7;10H╚════════╝\033[9;12Hby Leo G")
+	stdout.write("\033[0;97;40m\033[5;10H╔════════╗\033[6;10H║ TXTRIS ║\033[7;10H╚════════╝")
 	
 	stdout.flush()
 
