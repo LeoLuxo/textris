@@ -1,3 +1,5 @@
+![Python Versions](https://img.shields.io/static/v1?label=python&message=3.7%20|%203.8&color=orange)
+
 # Textris
 
 A text-based, colorful tetris implementation.
@@ -14,13 +16,12 @@ No additional modules/libraries needed!
 ## Controls
 
 - D: move right
-- A: move left
+- A: move left+
 - S: "soft" drop
 - W: hard drop
 - Right Arrow: rotate right
 - Left Arrow: rotate left
 - Space: hold piece
-
 
 ## Score saving
 
