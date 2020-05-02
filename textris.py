@@ -77,7 +77,7 @@ lines = 0
 goal = 5
 top = 0
 score = 0
-level = 1
+level = -1
 
 b2b = False
 
@@ -102,7 +102,7 @@ scores = []
 
 
 def fetchScores():
-	# Read the scores.tetris score file
+	# Read the score file
 	global scores, top
 	if not os.path.exists(SCOREFILE):
 		with open(SCOREFILE,"wb") as fc:
@@ -216,7 +216,7 @@ def drawGame():
 			if grid[y][x] == 0:
 				stdout.write("\033[0;40;30m█")
 			else:
-				stdout.write("\033[0;38;2;" + COLORS[grid[y][x]-1] + "m█")
+				stdout.write(f"\033[0;38;2;{COLORS[grid[y][x]-1]}m█")
 		stdout.write("\033[1A\033[10D")
 	
 	stdout.write("\033[?25l")
@@ -229,10 +229,10 @@ def drawScores():
 	global lines, top, score, level
 	
 	stdout.write("\033[0;97;100m")
-	stdout.write("\033[2;10HLines: " + str(min(lines, 999) + 1000)[-3:])
-	stdout.write("\033[11;2HHigh\033[12;3H" + str(min(top, 999999) + 1000000)[-6:])
-	stdout.write("\033[14;2HScore\033[15;3H" + str(min(score, 999999) + 1000000)[-6:])
-	stdout.write("\033[21;2HLevel\033[22;3H" + (str(min(level, 99) + 100)[-2:] if level > 0 else "--"))
+	stdout.write(f"\033[2;10HLines: {min(lines, 999):03}")
+	stdout.write(f"\033[11;2HHigh\033[12;3H{min(top, 999999):06}")
+	stdout.write(f"\033[14;2HScore\033[15;3H{min(score, 999999):06}")
+	stdout.write("\033[21;2HLevel\033[22;3H" + (f"{min(level, 99):02}" if level > 0 else "--"))
 	
 	stdout.flush()
 
@@ -266,8 +266,7 @@ def drawTitle():
 	for i in range(20):
 		stdout.write("\033[" + str(4+i) + ";10H" + " "*10)
 	
-	# stdout.write("\033[0;97;40m\033[5;10H╔════════╗\033[6;10H║ TETRIS ║\033[7;10H╚════════╝\033[9;12Hby Leo G")
-	stdout.write("\033[0;97;40m\033[5;10H╔════════╗\033[6;10H║ TXTRIS ║\033[7;10H╚════════╝")
+	stdout.write("\033[0;97;40m\033[5;10H╔════════╗\033[6;10H║ TXTRIS ║\033[7;10H╚════════╝\033[9;10Hby LeoLuxo")
 	
 	stdout.flush()
 
@@ -296,7 +295,7 @@ def scoreboard():
 	
 	# Fade into the transition screen
 	for i in range(24):
-		stdout.write("\033[" + str(i+1) + ";1H\033[0;40m"+" "*27)
+		stdout.write(f"\033[{i+1};1H\033[0;40m" + " "*27)
 		stdout.flush()
 		time.sleep(0.05)
 	
@@ -317,10 +316,10 @@ def scoreboard():
 	# Draw scores
 	c = ["230;50;255", "0;200;255", "0;200;255", "90;220;100", "90;220;100", "255;255;255"]
 	for i in range(10):
-		stdout.write("\033[" + str(i + 10) + ";3H\033[38;2;" + c[min(5, i)] + "m")
-		stdout.write(" "*(3-len(str(i+1))) + str(i+1) + ["ST", "ND", "RD", "TH"][min(3, i)])
+		stdout.write(f"\033[{i + 10};3H\033[38;2;{c[min(5, i)]}m")
+		stdout.write(f"{i+1:3}" + ["ST", "ND", "RD", "TH"][min(3, int(str(i)[-1]))])
 		if len(scores) > i:
-			stdout.write("\033[0;97;40m   " + scores[i][0] + "   " + " "*(10-len(str(scores[i][1]))) + str(scores[i][1]))
+			stdout.write(f"\033[0;97;40m   {scores[i][0]}   " + " "*(10-len(str(scores[i][1]))) + str(scores[i][1]))
 	
 	stdout.flush()
 	
@@ -330,7 +329,7 @@ def scoreboard():
 	while True:
 		stdout.write("\033[0;97;40m" if show else "\033[0;30;40m")
 		stdout.write("\033[4;2H>")
-		stdout.write("\033[0;36;40m\033[4;16H" + (name+"___")[:3])
+		stdout.write(f"\033[0;36;40m\033[4;16H{(name + '___')[:3]}")
 		stdout.flush()
 		show = not show
 		if msvcrt.kbhit():
@@ -359,10 +358,10 @@ def scoreboard():
 	# Flash the player's score forever to satisfy their ego of a good tetris player
 	show = True
 	while True:
-		stdout.write("\033[" + str(min(9, pos) + 10) + ";2H")
+		stdout.write(f"\033[{min(9, pos) + 10};2H")
 		stdout.write("\033[0;38;2;255;200;0m>" if show else " ")
-		stdout.write("\033[0;38;2;255;200;0m" if show else "\033[38;2;" + c[min(5, pos)] + "m")
-		stdout.write(" "*(3-len(str(pos+1))) + str(pos+1) + ["ST", "ND", "RD", "TH"][min(3, pos)])
+		stdout.write("\033[0;38;2;255;200;0m" if show else f"\033[38;2;{c[min(5, pos)]}m")
+		stdout.write(f"{pos+1:3}" + ["ST", "ND", "RD", "TH"][min(3, int(str(pos)[-1]))])
 		stdout.write(("\033[0;97;40m   " if not show else "   ") + name + "   " + " "*(10-len(str(score))) + str(score))
 		stdout.flush()
 		show = not show
@@ -374,8 +373,8 @@ def drawMino(id, rot, y, x, boundsY=0, alt=0):
 	
 	if id == 0:
 		return
-	stdout.write("\033[" + str(y) + ";" + str(x) + "H")
-	stdout.write("\033[0;38;2;" + COLORS[id-1] + "m")
+	stdout.write(f"\033[{y};{x}H")
+	stdout.write(f"\033[0;38;2;{COLORS[id-1]}m")
 	
 	for i, r in enumerate(MINOS[id-1][rot]):
 		for c in r:
@@ -387,7 +386,7 @@ def drawMino(id, rot, y, x, boundsY=0, alt=0):
 				stdout.write("X")
 			else:
 				stdout.write(c)
-		stdout.write("\033[1B\033[" + str(len(r)) + "D")
+		stdout.write(f"\033[1B\033[{len(r)}D")
 	stdout.flush()
 
 
@@ -672,13 +671,13 @@ def doRound():
 				
 				for i in range(10):
 					for j in clines:
-						stdout.write("\033[0;38;2;255;255;255m\033[" + str(23 - j) + ";" + str(10 + i) + "H/")
+						stdout.write(f"\033[0;38;2;255;255;255m\033[{23 - j};{10 + i}H/")
 						stdout.flush()
 					time.sleep(0.035)
 				
 				for i in range(10):
 					for j in clines:
-						stdout.write("\033[0;38;2;0;0;0m\033[" + str(23 - j) + ";" + str(10 + i) + "H█")
+						stdout.write(f"\033[0;38;2;0;0;0m\033[{23 - j};{10 + i}H█")
 						stdout.flush()
 					time.sleep(0.035)
 				for j in range(len(clines)):
