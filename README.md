@@ -7,11 +7,11 @@ The challenge was to code a game of tetris without using any non-default librari
 
 ## Run it
 
-Python 3.7 or 3.8 are required to run this project.
 Download/clone textris.py and run it inside CMD or your favorite ANSI-compatible shell. (only tested on Windows)
-```bash
-python3 textris.py
+```console
+$ python3 textris.py
 ```
+Requirements: Python 3.7 or higher\
 No additional modules/libraries needed!
 
 ## Controls
