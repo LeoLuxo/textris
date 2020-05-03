@@ -32,3 +32,8 @@ To disable score saving and loading, change the SAVESCORE variable in textris.py
 ```python
 SAVESCORES = False
 ```
+
+## Media
+![Menu](/screenshots/textris-1.png?raw=true)
+![Gameplay](/screenshots/textris-2.png?raw=true)
+![Scores](/screenshots/textris-3.png?raw=true)
