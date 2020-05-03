@@ -203,7 +203,7 @@ def initScreen():
 	handle = ctypes.windll.kernel32.GetStdHandle(-11)
 	ctypes.windll.kernel32.SetCurrentConsoleFontEx(handle, False, ctypes.pointer(font))
 	ctypes.windll.kernel32.SetConsoleWindowInfo(handle, True, ctypes.pointer(rect))
-	ctypes.windll.kernel32.SetConsoleTitleW("Tetris")
+	ctypes.windll.kernel32.SetConsoleTitleW("Txtris")
 	
 	stdout.write("\033[2J")
 	stdout.write("\033[3J")
