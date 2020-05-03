@@ -8,7 +8,7 @@ from random import sample
 from math import ceil
 from string import ascii_lowercase
 
-VERSIONS = [(3, 7), (3, 8)]
+VERSIONS = [(3, 6), (3, 7), (3, 8)]
 
 if sys.version_info[:2] not in VERSIONS:
 	c = " | ".join([f"{v[0]}.{v[1]}" for v in VERSIONS])
