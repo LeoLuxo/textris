@@ -13,8 +13,8 @@ Download/clone textris.py and run it inside CMD or your favorite ANSI-compatible
 ```console
 $ python textris.py
 ```
-Requirements: **Python 3.6 or higher**\
-No additional modules/libraries needed!
+Python version: **Python 3.6 or higher**\
+No additional packages/requirements needed!
 
 ## Controls
 
