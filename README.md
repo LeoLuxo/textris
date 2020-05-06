@@ -9,7 +9,7 @@ The challenge was to code a game of tetris without using any non-default librari
 
 Download/clone textris.py and run it inside CMD or your favorite ANSI-compatible shell. (only tested on Windows)
 ```console
-$ python3 textris.py
+$ python textris.py
 ```
 Requirements: **Python 3.6 or higher**\
 No additional modules/libraries needed!
@@ -34,6 +34,7 @@ SAVESCORES = False
 ```
 
 ## Media
-![Menu](/screenshots/textris-1.png?raw=true)
-![Gameplay](/screenshots/textris-2.png?raw=true)
-![Scores](/screenshots/textris-3.png?raw=true)
+![Menu](/images/textris-1.png?raw=true)
+![Gameplay](/images/textris-2.png?raw=true)
+![Scores](/images/textris-3.png?raw=true)
+![Launch demo gif](/images/textris_launch_demo.gif?raw=true)
