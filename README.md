@@ -7,6 +7,8 @@ The challenge was to code a game of tetris without using any non-default librari
 
 ## Run it
 
+![Launch demo gif](/images/textris_launch_demo.gif?raw=true)
+
 Download/clone textris.py and run it inside CMD or your favorite ANSI-compatible shell. (only tested on Windows)
 ```console
 $ python textris.py
@@ -37,4 +39,3 @@ SAVESCORES = False
 ![Menu](/images/textris-1.png?raw=true)
 ![Gameplay](/images/textris-2.png?raw=true)
 ![Scores](/images/textris-3.png?raw=true)
-![Launch demo gif](/images/textris_launch_demo.gif?raw=true)
